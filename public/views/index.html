@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div>
+        <input type="text" id="dis">
+    </div>
+    <div>
+        <button id="restart">重启</button>
+        <button id="stop">停止</button>
+    </div>
+
+    <script src="./public/vender/socket.io-client/dist/socket.io.js"></script>
+    <script>
+        var socket = io();
+        var restartBtn = document.getElementById('restart');
+        var stopBtn = document.getElementById('stop');
+        socket.on('connect', function() {
+            console.log('connected');
+        });
+        restartBtn.onclick = function() {
+            console.log('restart');
+            socket.emit('message',{message: 'restart'});
+        }
+        stopBtn.onclick = function() {
+            console.log('stop');
+            socket.emit('message', {message: 'stop'});
+        }
+    </script>
+</body>
+</html>

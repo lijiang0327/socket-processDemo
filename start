@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+'use strict';
+
+var fork = require('child_process').fork;
+var numCPUs = require('os').cpus().length;
+var fs = require('fs');
+var path = require('path');
+
+var loader = require('./loader');
+
+switch(process.argv[2]) {
+    case 'build': {
+        var args = process.argv.slice(0);
+        args[2] = '--' + args[2];
+        fork('app.js', args);
+        break;
+    }
+    default : {
+        loader.start();
+    }
+}
